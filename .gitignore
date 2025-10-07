@@ -1,0 +1,25 @@
+Standard Python Ignore List
+Byte-compiled / optimized / DLL files
+pycache/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+.eggs/
+
+Environments
+venv/
+env/
+.env
+
+Testing
+.pytest_cache/
+htmlcov/
+.coverage
+
+IDE/OS Specific
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
