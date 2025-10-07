@@ -1,14 +1,18 @@
 # time_lock_decorator_task
-A Python decorator (time_lock) challenge for rate-limiting function execution. Implements caching and checks the time interval between calls.
+A Python decorator (time_lock) challenge for rate-limiting function execution. 
+Implements caching and checks the time interval between calls.
 
 Python Task: Декоратор time_lock
 🎯 Завдання
-Напишіть декоратор Python під назвою time_lock, який обмежує частоту виклику декорованої функції. Якщо функцію викликано занадто швидко (до закінчення встановленого ліміту часу), вона повинна повернути останній відомий результат або спеціальне повідомлення, але НЕ виконувати основну логіку знову.
+Напишіть декоратор Python під назвою time_lock, який обмежує частоту виклику декорованої функції. 
+Якщо функцію викликано занадто швидко (до закінчення встановленого ліміту часу), 
+вона повинна повернути останній відомий результат або спеціальне повідомлення, але НЕ виконувати основну логіку знову.
 
 Ця задача перевіряє ваше знання про Декоратори, Замикання (Closure), керування Станом та використання модуля time.
 
 🛠️ Вимоги до реалізації
-Декоратор з аргументами: Декоратор time_lock повинен приймати один позиційний аргумент — seconds (число з рухомою комою або ціле число), що вказує мінімальний інтервал між успішними виконаннями функції.
+Декоратор з аргументами: Декоратор time_lock повинен приймати один позиційний аргумент — seconds (число з рухомою комою або ціле число), 
+що вказує мінімальний інтервал між успішними виконаннями функції.
 
 Замикання та Стан: Декоратор має використовувати замикання для зберігання двох внутрішніх змінних:
 
@@ -69,42 +73,6 @@ Call 3: Data for user 101 fetched at 1678886403.678
 📝 Поради
 Використовуйте time.time() для отримання поточної мітки часу.
 
-Змінні last_run та last_result повинні бути визначені у зовнішньому обсязі (всередині time_lock) та змінені у внутрішньому обсязі (всередині wrapper) за допомогою ключового слова nonlocal.
+Змінні last_run та last_result повинні бути визначені у зовнішньому обсязі (всередині time_lock) 
+та змінені у внутрішньому обсязі (всередині wrapper) за допомогою ключового слова nonlocal.
 -------------------------------------------
-Time Lock Decorator
-Task Description
-Create a Python decorator named time_lock(seconds) that imposes a rate limit on the calls to the decorated function.
-
-The decorator must accept one argument:
-
-seconds (integer): The minimum time (in seconds) that must elapse between consecutive successful calls of the decorated function.
-
-Requirements
-Limitation: If the function is called before seconds have passed since its last successful execution, the decorator must prevent the new execution.
-
-Blocked Behavior: If the call is blocked, the function should return None and print a warning message to the console, for example:
-
-"Call blocked. Please try again in X seconds."
-
-Successful Behavior: If the required time has elapsed, the function executes normally, and the time of its last call is updated.
-
-Initial Call: The very first call to the function must always be successful.
-
-Example Usage
-import time
-
-@time_lock(seconds=5)
-def send_notification(user, message):
-    print(f"[{time.strftime('%H:%M:%S')}] Notification sent to user {user}: {message}")
-    return True # Successful execution signal
-
-# First call (successful)
-send_notification("Alice", "Hello")
-
-# Attempt second call after 2 seconds (blocked)
-time.sleep(2)
-send_notification("Alice", "How are you?")
-
-# Attempt third call after 6 seconds (successful)
-time.sleep(4)
-send_notification("Bob", "This is a new notification")
